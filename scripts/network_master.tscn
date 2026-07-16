@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bltjwo5xfgmdr"]
+
+[ext_resource type="Script" uid="uid://dp3l1ie85sqta" path="res://network_master.gd" id="1_udnis"]
+
+[node name="NetworkMaster" type="Node" unique_id=1791151751]
+script = ExtResource("1_udnis")

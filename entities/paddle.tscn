@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dqojax6xtqdwu"]
+
+[ext_resource type="Script" uid="uid://0yh2iq0cwohl" path="res://entities/player.gd" id="1_l1tcj"]
+
+[sub_resource type="Gradient" id="Gradient_dpwsk"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_l1tcj"]
+gradient = SubResource("Gradient_dpwsk")
+width = 16
+height = 128
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_l1tcj"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="Paddle" type="StaticBody2D" unique_id=1305071130]
+script = ExtResource("1_l1tcj")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=427589390]
+texture = SubResource("GradientTexture2D_l1tcj")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=661545634]
+visible = false
+polygon = PackedVector2Array(-8, -64, -8, 64, 8, 64, 8, -64)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=279788370]
+replication_config = SubResource("SceneReplicationConfig_l1tcj")
