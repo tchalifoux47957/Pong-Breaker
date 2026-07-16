@@ -1,6 +1,8 @@
 extends StaticBody2D
 class_name Player
 
+const PADDLE_SPEED: int = 500
+
 var win_height: int
 var p_height: int
 
@@ -27,9 +29,9 @@ func _process(delta: float) -> void:
 		return
 		
 	if Input.is_action_pressed("up"):
-		position.y -= get_parent().PADDLE_SPEED * delta
+		position.y -= PADDLE_SPEED * delta
 	elif Input.is_action_pressed("down"):
-		position.y += get_parent().PADDLE_SPEED * delta
+		position.y += PADDLE_SPEED * delta
 		
 	if mouse_input.length() > 0.5:
 		
