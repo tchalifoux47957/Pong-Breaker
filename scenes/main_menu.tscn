@@ -1,0 +1,150 @@
+[gd_scene format=3 uid="uid://b4rlxrfhpt2sx"]
+
+[ext_resource type="Script" uid="uid://wvneplrvl5na" path="res://scenes/main_menu.gd" id="1_ekxnf"]
+[ext_resource type="Theme" uid="uid://b8qrjn3rdj1u8" path="res://PB_Theme.tres" id="1_l6cm7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7vrkn"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.16924515, 0.16924536, 0.16924527, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ekxnf"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="MainMenu" type="Control" unique_id=191036996]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ekxnf")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1657082717]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1148968, 0.11489681, 0.1148968, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1520102516]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -275.96973
+offset_top = -20.0
+offset_right = -127.96973
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="SP_Button" type="Button" parent="VBoxContainer" unique_id=2115331016]
+layout_mode = 2
+theme = ExtResource("1_l6cm7")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_7vrkn")
+text = "Singleplayer"
+flat = true
+
+[node name="MP_Button" type="Button" parent="VBoxContainer" unique_id=467632308]
+layout_mode = 2
+theme = ExtResource("1_l6cm7")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_7vrkn")
+text = "Multiplayer"
+flat = true
+
+[node name="Options_Button" type="Button" parent="VBoxContainer" unique_id=460812803]
+layout_mode = 2
+theme = ExtResource("1_l6cm7")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_7vrkn")
+text = "Options"
+flat = true
+
+[node name="Quit_Button" type="Button" parent="VBoxContainer" unique_id=685549107]
+layout_mode = 2
+theme = ExtResource("1_l6cm7")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_7vrkn")
+text = "Quit"
+flat = true
+
+[node name="QuitPanel" type="PanelContainer" parent="." unique_id=96440741]
+visible = false
+top_level = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -272.0
+offset_top = -25.0
+offset_right = 312.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ekxnf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="QuitPanel" unique_id=1305976387]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="ErrorLabel" type="Label" parent="QuitPanel/VBoxContainer" unique_id=1582909140]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_l6cm7")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Are you sure?"
+horizontal_alignment = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="QuitPanel/VBoxContainer" unique_id=1155503407]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 200
+
+[node name="QuitAcceptButton" type="Button" parent="QuitPanel/VBoxContainer/HBoxContainer" unique_id=718565957]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("1_l6cm7")
+text = "Accept"
+
+[node name="QuitBackButton" type="Button" parent="QuitPanel/VBoxContainer/HBoxContainer" unique_id=1987393220]
+layout_mode = 2
+theme = ExtResource("1_l6cm7")
+text = "Return"
+
+[connection signal="pressed" from="VBoxContainer/MP_Button" to="." method="_on_mp_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit_Button" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="QuitPanel/VBoxContainer/HBoxContainer/QuitAcceptButton" to="." method="_on_quit_accept_button_pressed"]
+[connection signal="pressed" from="QuitPanel/VBoxContainer/HBoxContainer/QuitBackButton" to="." method="_on_back_button_pressed"]

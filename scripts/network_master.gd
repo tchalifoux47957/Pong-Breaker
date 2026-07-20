@@ -7,6 +7,9 @@ const LOBBY_TYPE := Steam.LobbyType.LOBBY_TYPE_FRIENDS_ONLY
 const MAX_PLAYERS: int = 2
 
 var peer: SteamMultiplayerPeer
+var isJoining: bool = false
+
+var lobbyID: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -26,13 +29,15 @@ func host_lobby() -> void:
 	Steam.createLobby(LOBBY_TYPE, MAX_PLAYERS)
 	
 #After creating local lobby
-func _on_lobby_created(connect: int, lobbyID: int) -> void:
+func _on_lobby_created(connect: int, newLobbyID: int) -> void:
 	if connect == Steam.RESULT_OK:
+		self.lobbyID = newLobbyID
 		peer = SteamMultiplayerPeer.new()
 		peer.server_relay = true
 		peer.create_host()
 		multiplayer.multiplayer_peer = peer
 		host_created.emit()
+		print(lobbyID)
 	
 #When joining a lobby (after creation or joining other)
 func _on_lobby_joined(lobbyID: int, permissions: int, locked: bool, response: int) -> void:
@@ -48,3 +53,7 @@ func _on_lobby_joined(lobbyID: int, permissions: int, locked: bool, response: in
 #When joining via Steam overlay
 func _on_join_requested(lobbyID: int, SteamID: int) -> void:
 	Steam.joinLobby(lobbyID)
+
+func join_lobby(newlobbyID: int) -> void:
+	isJoining = true
+	Steam.joinLobby(newlobbyID)

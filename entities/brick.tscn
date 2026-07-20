@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://clhx8h7vvnos1"]
+
+[ext_resource type="Script" uid="uid://1e7w064yhhy5" path="res://entities/brick.gd" id="1_1kqt2"]
+
+[sub_resource type="Gradient" id="Gradient_d1bm0"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1kqt2"]
+gradient = SubResource("Gradient_d1bm0")
+width = 16
+
+[node name="Brick" type="StaticBody2D" unique_id=198899447]
+script = ExtResource("1_1kqt2")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1714751910]
+texture = SubResource("GradientTexture2D_1kqt2")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=465815273]
+polygon = PackedVector2Array(-8, -32, -8, 32, 8, 32, 8, -32)

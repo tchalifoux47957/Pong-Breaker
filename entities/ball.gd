@@ -33,7 +33,8 @@ func _process(delta: float) -> void:
 			print(speed)
 		else:
 			dir = dir.bounce(collision.get_normal())
-			
+			if collider is Brick:
+				collider.queue_free()
 func random_direction():
 	var new_dir:= Vector2()
 	new_dir.x = [1, -1].pick_random()

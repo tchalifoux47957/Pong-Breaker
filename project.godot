@@ -10,14 +10,15 @@ config_version=5
 
 [application]
 
-config/name="Pong-Breaker_Deluxe"
-run/main_scene="uid://8gns2hgjfavu"
+config/name="Pong-Breaker"
+run/main_scene="uid://b4rlxrfhpt2sx"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 NetworkMaster="*uid://dp3l1ie85sqta"
+Global="*uid://bnwwkimwvb7fc"
 
 [display]
 

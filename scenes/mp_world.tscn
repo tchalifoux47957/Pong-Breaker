@@ -1,0 +1,328 @@
+[gd_scene format=3 uid="uid://8gns2hgjfavu"]
+
+[ext_resource type="Script" uid="uid://t6dqprojiun6" path="res://scenes/mp_world.gd" id="1_jf37d"]
+[ext_resource type="Script" uid="uid://cdpflo1cg5fck" path="res://scenes/game_master.gd" id="2_wu5gp"]
+[ext_resource type="Texture2D" uid="uid://46tba80lq2yl" path="res://assets/images/bg.png" id="3_pios7"]
+[ext_resource type="Theme" uid="uid://b8qrjn3rdj1u8" path="res://PB_Theme.tres" id="4_u22x2"]
+[ext_resource type="Script" uid="uid://yui57riaw85m" path="res://scenes/ErrorWindow.gd" id="5_owvdf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71j4m"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="Animation" id="Animation_jf37d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Overlay/TextPanel/HBoxContainer/Label:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["..."]
+}
+
+[sub_resource type="Animation" id="Animation_wu5gp"]
+resource_name = "waiting"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Overlay/TextPanel/HBoxContainer/Label:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": ["", ".", "..", "..."]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pios7"]
+_data = {
+&"RESET": SubResource("Animation_jf37d"),
+&"waiting": SubResource("Animation_wu5gp")
+}
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_71j4m"]
+properties/0/path = NodePath("UI/ScoreContainer/Score1:text")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("UI/ScoreContainer/Score2:text")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k0juu"]
+size = Vector2(1152, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_71j4m"]
+size = Vector2(20, 648)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qfnet"]
+size = Vector2(20, 648)
+
+[node name="MPWorld" type="Node2D" unique_id=1504391620]
+script = ExtResource("1_jf37d")
+
+[node name="GameMaster" type="Node" parent="." unique_id=187486455]
+script = ExtResource("2_wu5gp")
+
+[node name="Reset" type="Timer" parent="GameMaster" unique_id=1709741696]
+wait_time = 3.0
+one_shot = true
+
+[node name="LeftBrickContainer" type="Node2D" parent="GameMaster" unique_id=739166692]
+position = Vector2(16, 32)
+
+[node name="RightBrickContainer" type="Node2D" parent="GameMaster" unique_id=805944918]
+position = Vector2(1136, 32)
+
+[node name="GameElements" type="CanvasLayer" parent="." unique_id=1063050089]
+layer = -1
+visible = false
+
+[node name="BG" type="TextureRect" parent="GameElements" unique_id=345735814]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_pios7")
+
+[node name="ScoreContainer" type="HBoxContainer" parent="GameElements" unique_id=1181490012]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -56.0
+offset_top = 32.0
+offset_right = 56.0
+offset_bottom = 81.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Score1" type="Label" parent="GameElements/ScoreContainer" unique_id=809102843]
+layout_mode = 2
+theme = ExtResource("4_u22x2")
+text = "0"
+horizontal_alignment = 1
+
+[node name="Score2" type="Label" parent="GameElements/ScoreContainer" unique_id=801929982]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("4_u22x2")
+text = "0"
+horizontal_alignment = 1
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=373102787]
+
+[node name="LobbyScreen" type="Control" parent="UI" unique_id=1910865867]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="UI/LobbyScreen" unique_id=2021990256]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.59611374, 0.34194395, 0.46360576, 1)
+
+[node name="OptionPanel" type="Panel" parent="UI/LobbyScreen/ColorRect" unique_id=1574670568]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/LobbyScreen/ColorRect/OptionPanel" unique_id=1895218614]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.5
+offset_top = -45.5
+offset_right = 48.5
+offset_bottom = 45.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HostButton" type="Button" parent="UI/LobbyScreen/ColorRect/OptionPanel/VBoxContainer" unique_id=1946780596]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("4_u22x2")
+text = "HOST"
+
+[node name="JoinButton" type="Button" parent="UI/LobbyScreen/ColorRect/OptionPanel/VBoxContainer" unique_id=772568883]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("4_u22x2")
+disabled = true
+text = "JOIN"
+
+[node name="LineEdit" type="LineEdit" parent="UI/LobbyScreen/ColorRect/OptionPanel/VBoxContainer" unique_id=1132876634]
+layout_mode = 2
+theme = ExtResource("4_u22x2")
+placeholder_text = "Lobby ID"
+expand_to_text_length = true
+
+[node name="ErrorPanel" type="PanelContainer" parent="UI" unique_id=1686988982]
+visible = false
+top_level = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -272.0
+offset_top = -25.0
+offset_right = 312.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_71j4m")
+script = ExtResource("5_owvdf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ErrorPanel" unique_id=473494891]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="ErrorLabel" type="Label" parent="UI/ErrorPanel/VBoxContainer" unique_id=967055735]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_u22x2")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Error: Steam must be running"
+horizontal_alignment = 3
+
+[node name="Button" type="Button" parent="UI/ErrorPanel/VBoxContainer" unique_id=703215966]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("4_u22x2")
+text = "Accept"
+
+[node name="WaitingPopup" type="Control" parent="UI" unique_id=39236313]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Overlay" type="Panel" parent="UI/WaitingPopup" unique_id=1457565951]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextPanel" type="PanelContainer" parent="UI/WaitingPopup/Overlay" unique_id=162561854]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -24.5
+offset_right = 128.0
+offset_bottom = 24.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/WaitingPopup/Overlay/TextPanel" unique_id=964007728]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="WaitingLabel" type="Label" parent="UI/WaitingPopup/Overlay/TextPanel/HBoxContainer" unique_id=820777485]
+layout_mode = 2
+theme = ExtResource("4_u22x2")
+text = "Waiting"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="UI/WaitingPopup/Overlay/TextPanel/HBoxContainer" unique_id=265644287]
+layout_mode = 2
+theme = ExtResource("4_u22x2")
+text = "..."
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/WaitingPopup" unique_id=696474530]
+libraries/ = SubResource("AnimationLibrary_pios7")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=452426108]
+_spawnable_scenes = PackedStringArray("uid://dqojax6xtqdwu")
+spawn_path = NodePath("..")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1477341451]
+replication_config = SubResource("SceneReplicationConfig_71j4m")
+
+[node name="Boundary" type="StaticBody2D" parent="." unique_id=1842101756]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary" unique_id=1851270098]
+position = Vector2(576, -10)
+shape = SubResource("RectangleShape2D_k0juu")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Boundary" unique_id=1823348280]
+position = Vector2(576, 658)
+shape = SubResource("RectangleShape2D_k0juu")
+
+[node name="GoalLeft" type="Area2D" parent="." unique_id=1958297534]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalLeft" unique_id=603216582]
+position = Vector2(-10, 324)
+shape = SubResource("RectangleShape2D_71j4m")
+
+[node name="GoalRight" type="Area2D" parent="." unique_id=139059442]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalRight" unique_id=377358584]
+position = Vector2(1162, 324)
+shape = SubResource("RectangleShape2D_qfnet")
+
+[connection signal="timeout" from="GameMaster/Reset" to="GameMaster" method="_on_reset_timeout"]
+[connection signal="pressed" from="UI/LobbyScreen/ColorRect/OptionPanel/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="UI/LobbyScreen/ColorRect/OptionPanel/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="text_changed" from="UI/LobbyScreen/ColorRect/OptionPanel/VBoxContainer/LineEdit" to="." method="_on_line_edit_text_changed"]
+[connection signal="pressed" from="UI/ErrorPanel/VBoxContainer/Button" to="UI/ErrorPanel" method="_on_button_pressed"]
+[connection signal="spawned" from="MultiplayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]
+[connection signal="body_entered" from="GoalLeft" to="GameMaster" method="_on_goal_left_body_entered"]
+[connection signal="body_entered" from="GoalRight" to="GameMaster" method="_on_goal_right_body_entered"]
