@@ -1,8 +1,9 @@
 extends Node
 class_name GameMaster
 
-const BRICK = preload("uid://clhx8h7vvnos1")
 const BRICK_QTY: int = 8
+@onready var left_brick_container: Node2D = $LeftBrickContainer
+@onready var right_brick_container: Node2D = $RightBrickContainer
 
 @onready var score_1: Label = $"../GameElements/ScoreContainer/Score1"
 @onready var score_2: Label = $"../GameElements/ScoreContainer/Score2"
@@ -12,10 +13,13 @@ var ball: Ball = null
 var score:= [0,0] # [Player1, Player2]
 var resetGame: bool = false
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	generate_bricks()
-
+	left_brick_container.set_position(Vector2(16 ,left_brick_container.position.y))
+	right_brick_container.set_position(Vector2(560, right_brick_container.position.y))
+	left_brick_container.generate_bricks(BRICK_QTY)
+	right_brick_container.generate_bricks(BRICK_QTY)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -24,9 +28,10 @@ func _process(delta: float) -> void:
 
 func _on_reset_timeout() -> void:
 	if resetGame:
-		for i in $LeftBrickContainer.get_children(): i.queue_free()
-		for i in $RightBrickContainer.get_children(): i.queue_free()
-		generate_bricks()
+		for i in left_brick_container.get_children(): i.queue_free()
+		for i in right_brick_container.get_children(): i.queue_free()
+		left_brick_container.generate_bricks(BRICK_QTY)
+		right_brick_container.generate_bricks(BRICK_QTY)
 		resetGame = false
 	ball.new_ball()
 	
@@ -44,17 +49,5 @@ func _on_goal_right_body_entered(body: Node2D) -> void:
 	resetGame = true
 	reset_timer.start()
 
-func generate_bricks() -> void:
-	var pos = $LeftBrickContainer.position.y
-	for i in BRICK_QTY:
-		var newBrick: StaticBody2D = BRICK.instantiate()
-		$LeftBrickContainer.add_child(newBrick)
-		newBrick.position = Vector2($LeftBrickContainer.position.x, pos)
-		pos += 74
-		
-	pos = $RightBrickContainer.position.y
-	for i in BRICK_QTY:
-		var newBrick: StaticBody2D = BRICK.instantiate()
-		$RightBrickContainer.add_child(newBrick)
-		newBrick.position = Vector2($RightBrickContainer.position.x, pos)
-		pos += 74
+
+	

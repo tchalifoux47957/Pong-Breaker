@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://didxo3xvavawp"]
+
+[ext_resource type="Script" uid="uid://bey1kx3hnwegk" path="res://scenes/sp_world.gd" id="1_jn1vn"]
+[ext_resource type="Script" uid="uid://cdpflo1cg5fck" path="res://scenes/game_master.gd" id="2_41fvi"]
+[ext_resource type="Script" uid="uid://dwq7y0xlpeq48" path="res://entities/brick_container.gd" id="3_rmm6b"]
+[ext_resource type="Texture2D" uid="uid://46tba80lq2yl" path="res://assets/images/bg.png" id="3_w0618"]
+[ext_resource type="Theme" uid="uid://b8qrjn3rdj1u8" path="res://PB_Theme.tres" id="4_qduje"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k0juu"]
+size = Vector2(1152, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_71j4m"]
+size = Vector2(20, 648)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qfnet"]
+size = Vector2(20, 648)
+
+[node name="SPWorld" type="Node2D" unique_id=1504391620]
+script = ExtResource("1_jn1vn")
+
+[node name="GameMaster" type="Node" parent="." unique_id=187486455]
+script = ExtResource("2_41fvi")
+
+[node name="Reset" type="Timer" parent="GameMaster" unique_id=1709741696]
+wait_time = 3.0
+one_shot = true
+
+[node name="LeftBrickContainer" type="Node2D" parent="GameMaster" unique_id=739166692]
+position = Vector2(0, 32)
+script = ExtResource("3_rmm6b")
+
+[node name="RightBrickContainer" type="Node2D" parent="GameMaster" unique_id=805944918]
+position = Vector2(0, 32)
+script = ExtResource("3_rmm6b")
+
+[node name="GameElements" type="CanvasLayer" parent="." unique_id=1063050089]
+layer = -1
+
+[node name="BG" type="TextureRect" parent="GameElements" unique_id=345735814]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_w0618")
+
+[node name="ScoreContainer" type="HBoxContainer" parent="GameElements" unique_id=1181490012]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -56.0
+offset_top = 32.0
+offset_right = 56.0
+offset_bottom = 81.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Score1" type="Label" parent="GameElements/ScoreContainer" unique_id=809102843]
+layout_mode = 2
+theme = ExtResource("4_qduje")
+text = "0"
+horizontal_alignment = 1
+
+[node name="Score2" type="Label" parent="GameElements/ScoreContainer" unique_id=801929982]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("4_qduje")
+text = "0"
+horizontal_alignment = 1
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=373102787]
+
+[node name="Boundary" type="StaticBody2D" parent="." unique_id=1842101756]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundary" unique_id=1851270098]
+position = Vector2(576, -10)
+shape = SubResource("RectangleShape2D_k0juu")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Boundary" unique_id=1823348280]
+position = Vector2(576, 658)
+shape = SubResource("RectangleShape2D_k0juu")
+
+[node name="GoalLeft" type="Area2D" parent="." unique_id=1958297534]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalLeft" unique_id=603216582]
+position = Vector2(-10, 324)
+shape = SubResource("RectangleShape2D_71j4m")
+
+[node name="GoalRight" type="Area2D" parent="." unique_id=139059442]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalRight" unique_id=377358584]
+position = Vector2(1162, 324)
+shape = SubResource("RectangleShape2D_qfnet")
+
+[connection signal="timeout" from="GameMaster/Reset" to="GameMaster" method="_on_reset_timeout"]
+[connection signal="body_entered" from="GoalLeft" to="GameMaster" method="_on_goal_left_body_entered"]
+[connection signal="body_entered" from="GoalRight" to="GameMaster" method="_on_goal_right_body_entered"]

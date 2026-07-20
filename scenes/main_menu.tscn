@@ -144,6 +144,7 @@ layout_mode = 2
 theme = ExtResource("1_l6cm7")
 text = "Return"
 
+[connection signal="pressed" from="VBoxContainer/SP_Button" to="." method="_on_sp_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/MP_Button" to="." method="_on_mp_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Quit_Button" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="QuitPanel/VBoxContainer/HBoxContainer/QuitAcceptButton" to="." method="_on_quit_accept_button_pressed"]

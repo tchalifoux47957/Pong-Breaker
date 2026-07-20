@@ -9,7 +9,11 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
 gradient = SubResource("Gradient_d1bm0")
 width = 16
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_1kqt2"]
+
 [node name="Brick" type="StaticBody2D" unique_id=198899447]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("1_1kqt2")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1714751910]
@@ -17,3 +21,6 @@ texture = SubResource("GradientTexture2D_1kqt2")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=465815273]
 polygon = PackedVector2Array(-8, -32, -8, 32, 8, 32, 8, -32)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=758551780]
+replication_config = SubResource("SceneReplicationConfig_1kqt2")

@@ -1,14 +1,15 @@
 extends Node
 
 signal host_created()
-
+signal player_joined
 
 const LOBBY_TYPE := Steam.LobbyType.LOBBY_TYPE_FRIENDS_ONLY
 const MAX_PLAYERS: int = 2
 
+var singleplayer: bool = false
 var peer: SteamMultiplayerPeer
 var isJoining: bool = false
-
+var inGame: bool = false
 var lobbyID: int = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -49,9 +50,13 @@ func _on_lobby_joined(lobbyID: int, permissions: int, locked: bool, response: in
 		peer.server_relay = true
 		peer.create_client(Steam.getLobbyOwner(lobbyID))
 		multiplayer.multiplayer_peer = peer
+		player_joined.emit()
+		inGame = true
+		
 	
 #When joining via Steam overlay
 func _on_join_requested(lobbyID: int, SteamID: int) -> void:
+	get_tree().change_scene_to_file("res://scenes/mp_world.tscn")
 	Steam.joinLobby(lobbyID)
 
 func join_lobby(newlobbyID: int) -> void:

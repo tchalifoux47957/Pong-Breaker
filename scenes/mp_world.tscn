@@ -3,26 +3,9 @@
 [ext_resource type="Script" uid="uid://t6dqprojiun6" path="res://scenes/mp_world.gd" id="1_jf37d"]
 [ext_resource type="Script" uid="uid://cdpflo1cg5fck" path="res://scenes/game_master.gd" id="2_wu5gp"]
 [ext_resource type="Texture2D" uid="uid://46tba80lq2yl" path="res://assets/images/bg.png" id="3_pios7"]
+[ext_resource type="Script" uid="uid://dwq7y0xlpeq48" path="res://entities/brick_container.gd" id="3_wu5gp"]
 [ext_resource type="Theme" uid="uid://b8qrjn3rdj1u8" path="res://PB_Theme.tres" id="4_u22x2"]
 [ext_resource type="Script" uid="uid://yui57riaw85m" path="res://scenes/ErrorWindow.gd" id="5_owvdf"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71j4m"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0, 0, 0, 1)
-border_blend = true
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
 
 [sub_resource type="Animation" id="Animation_jf37d"]
 length = 0.001
@@ -61,6 +44,24 @@ _data = {
 &"waiting": SubResource("Animation_wu5gp")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71j4m"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_71j4m"]
 properties/0/path = NodePath("UI/ScoreContainer/Score1:text")
 properties/0/spawn = true
@@ -90,9 +91,11 @@ one_shot = true
 
 [node name="LeftBrickContainer" type="Node2D" parent="GameMaster" unique_id=739166692]
 position = Vector2(16, 32)
+script = ExtResource("3_wu5gp")
 
 [node name="RightBrickContainer" type="Node2D" parent="GameMaster" unique_id=805944918]
 position = Vector2(1136, 32)
+script = ExtResource("3_wu5gp")
 
 [node name="GameElements" type="CanvasLayer" parent="." unique_id=1063050089]
 layer = -1
@@ -201,45 +204,9 @@ theme = ExtResource("4_u22x2")
 placeholder_text = "Lobby ID"
 expand_to_text_length = true
 
-[node name="ErrorPanel" type="PanelContainer" parent="UI" unique_id=1686988982]
-visible = false
-top_level = true
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -272.0
-offset_top = -25.0
-offset_right = 312.0
-offset_bottom = 24.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_71j4m")
-script = ExtResource("5_owvdf")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI/ErrorPanel" unique_id=473494891]
-layout_mode = 2
-theme_override_constants/separation = 6
-alignment = 1
-
-[node name="ErrorLabel" type="Label" parent="UI/ErrorPanel/VBoxContainer" unique_id=967055735]
-layout_mode = 2
-size_flags_horizontal = 4
-theme = ExtResource("4_u22x2")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Error: Steam must be running"
-horizontal_alignment = 3
-
-[node name="Button" type="Button" parent="UI/ErrorPanel/VBoxContainer" unique_id=703215966]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-theme = ExtResource("4_u22x2")
-text = "Accept"
-
 [node name="WaitingPopup" type="Control" parent="UI" unique_id=39236313]
 visible = false
+top_level = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -286,6 +253,43 @@ text = "..."
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/WaitingPopup" unique_id=696474530]
 libraries/ = SubResource("AnimationLibrary_pios7")
+
+[node name="ErrorPanel" type="PanelContainer" parent="UI" unique_id=1686988982]
+visible = false
+top_level = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -272.0
+offset_top = -25.0
+offset_right = 312.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_71j4m")
+script = ExtResource("5_owvdf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ErrorPanel" unique_id=473494891]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="ErrorLabel" type="Label" parent="UI/ErrorPanel/VBoxContainer" unique_id=967055735]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_u22x2")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Error: Steam must be running"
+horizontal_alignment = 3
+
+[node name="Button" type="Button" parent="UI/ErrorPanel/VBoxContainer" unique_id=703215966]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("4_u22x2")
+text = "Accept"
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=452426108]
 _spawnable_scenes = PackedStringArray("uid://dqojax6xtqdwu")

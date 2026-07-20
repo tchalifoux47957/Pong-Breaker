@@ -10,6 +10,9 @@ const BALL = preload("uid://dqgio6jn88ad2")
 var players: Array[StaticBody2D]
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if NetworkMaster.inGame == true:
+		_on_player_joined()
+	NetworkMaster.player_joined.connect(_on_player_joined)
 	NetworkMaster.host_created.connect(_on_host_created)
 
 func _on_host_created() -> void:
@@ -24,7 +27,7 @@ func spawn_player(peerID: int, isHost: bool = false) -> void:
 		initialize_player(new_player, true)
 	else:
 		initialize_player(new_player)
-		$UI.hide()
+	$UI/LobbyScreen.hide()
 
 func initialize_player(player: StaticBody2D, isHost: bool = false) -> void:
 	if isHost:
@@ -69,3 +72,7 @@ func _on_line_edit_text_changed(new_text: String) -> void:
 
 func _on_join_button_pressed() -> void:
 	_join_button_pressed_.emit($UI/LobbyScreen/ColorRect/Panel/VBoxContainer/LineEdit.text.to_int())
+
+func _on_player_joined() -> void:
+	$UI/LobbyScreen.hide()
+	$GameElements.show()
