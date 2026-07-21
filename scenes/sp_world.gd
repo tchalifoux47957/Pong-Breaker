@@ -24,7 +24,7 @@ func _ready() -> void:
 	cpu.set_script(cpu_script)
 	cpu.position = Vector2(get_viewport_rect().size.x - 64, get_viewport_rect().size.y / 2 )
 	add_child(cpu)
-
+	$UI/PauseMenu.canPause = true
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

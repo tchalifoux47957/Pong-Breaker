@@ -30,6 +30,7 @@ func spawn_player(peerID: int, isHost: bool = false) -> void:
 	$UI/LobbyScreen.hide()
 
 func initialize_player(player: StaticBody2D, isHost: bool = false) -> void:
+	$UI/PauseMenu.canPause = true
 	if isHost:
 		player.position = Vector2( 64, get_viewport_rect().size.y / 2)
 	else:
@@ -68,10 +69,10 @@ func _on_multiplayer_spawner_spawned(node: Node) -> void:
 
 
 func _on_line_edit_text_changed(new_text: String) -> void:
-	$UI/LobbyScreen/ColorRect/Panel/VBoxContainer/JoinButton.disabled = new_text.length() == 0
+	$UI/LobbyScreen/ColorRect/OptionPanel/VBoxContainer/HostJoinHBox/JoinTextVBox/JoinButton.disabled = new_text.length() == 0
 
 func _on_join_button_pressed() -> void:
-	_join_button_pressed_.emit($UI/LobbyScreen/ColorRect/Panel/VBoxContainer/LineEdit.text.to_int())
+	_join_button_pressed_.emit($UI/LobbyScreen/ColorRect/OptionPanel/VBoxContainer/HostJoinHBox/JoinTextVBox/LobbyID.text.to_int())
 
 func _on_player_joined() -> void:
 	$UI/LobbyScreen.hide()

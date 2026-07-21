@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://dh56y3h2vlusn"]
+
+[ext_resource type="Theme" uid="uid://b8qrjn3rdj1u8" path="res://PB_Theme.tres" id="1_1c715"]
+[ext_resource type="Script" uid="uid://dt3352u03e02j" path="res://interfaces/pause_menu.gd" id="1_7jorx"]
+
+[node name="PauseMenu" type="Control" unique_id=2133951487]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7jorx")
+
+[node name="Panel" type="Panel" parent="." unique_id=2050166005]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel" unique_id=1215293794]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/PanelContainer" unique_id=1177503811]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Panel/PanelContainer/VBoxContainer" unique_id=1960579546]
+layout_mode = 2
+theme = ExtResource("1_1c715")
+text = "Paused"
+
+[node name="ReturnButton" type="Button" parent="Panel/PanelContainer/VBoxContainer" unique_id=1126851166]
+layout_mode = 2
+theme = ExtResource("1_1c715")
+text = "Return"
+
+[node name="OptionsButton" type="Button" parent="Panel/PanelContainer/VBoxContainer" unique_id=1317883123]
+layout_mode = 2
+theme = ExtResource("1_1c715")
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="Panel/PanelContainer/VBoxContainer" unique_id=1724905861]
+layout_mode = 2
+theme = ExtResource("1_1c715")
+text = "Quit"
+
+[connection signal="pressed" from="Panel/PanelContainer/VBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="Panel/PanelContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

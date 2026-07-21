@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://dwq7y0xlpeq48" path="res://entities/brick_container.gd" id="3_rmm6b"]
 [ext_resource type="Texture2D" uid="uid://46tba80lq2yl" path="res://assets/images/bg.png" id="3_w0618"]
 [ext_resource type="Theme" uid="uid://b8qrjn3rdj1u8" path="res://PB_Theme.tres" id="4_qduje"]
+[ext_resource type="PackedScene" uid="uid://dh56y3h2vlusn" path="res://interfaces/pause_menu.tscn" id="6_41fvi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k0juu"]
 size = Vector2(1152, 20)
@@ -72,6 +73,8 @@ text = "0"
 horizontal_alignment = 1
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=373102787]
+
+[node name="PauseMenu" parent="UI" unique_id=2133951487 instance=ExtResource("6_41fvi")]
 
 [node name="Boundary" type="StaticBody2D" parent="." unique_id=1842101756]
 collision_layer = 2

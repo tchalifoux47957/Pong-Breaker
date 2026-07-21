@@ -18,7 +18,7 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	win_height = get_viewport_rect().size.y
 	p_height = $Sprite2D.get_rect().size.y
-
+	
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		mouse_input = event.relative.normalized()
@@ -28,6 +28,9 @@ func _process(delta: float) -> void:
 	if !is_multiplayer_authority() && NetworkMaster.singleplayer == false:
 		return
 		
+	if NetworkMaster.isGamePaused == true:
+		return
+	
 	if Input.is_action_pressed("up"):
 		position.y -= PADDLE_SPEED * delta
 	elif Input.is_action_pressed("down"):

@@ -10,6 +10,7 @@ var singleplayer: bool = false
 var peer: SteamMultiplayerPeer
 var isJoining: bool = false
 var inGame: bool = false
+var isGamePaused:bool = false
 var lobbyID: int = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -62,3 +63,6 @@ func _on_join_requested(lobbyID: int, SteamID: int) -> void:
 func join_lobby(newlobbyID: int) -> void:
 	isJoining = true
 	Steam.joinLobby(newlobbyID)
+
+func setPaused() -> void:
+	isGamePaused = !isGamePaused
