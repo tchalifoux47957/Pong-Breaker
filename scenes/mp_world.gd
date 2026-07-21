@@ -1,6 +1,5 @@
 extends Node2D
 
-signal _join_button_pressed_(newLobbyID: int)
 
 const PADDLE = preload("uid://dqojax6xtqdwu")
 const BALL = preload("uid://dqgio6jn88ad2")
@@ -14,6 +13,7 @@ func _ready() -> void:
 	if NetworkMaster.inGame == true:
 		_on_player_joined()
 	NetworkMaster.player_joined.connect(_on_player_joined)
+	NetworkMaster.player_left.connect(_on_player_leave)
 	NetworkMaster.host_created.connect(_on_host_created)
 
 func _on_host_created() -> void:
@@ -73,7 +73,7 @@ func _on_line_edit_text_changed(new_text: String) -> void:
 	$UI/LobbyScreen/ColorRect/OptionPanel/VBoxContainer/HostJoinHBox/JoinTextVBox/JoinButton.disabled = new_text.length() == 0
 
 func _on_join_button_pressed() -> void:
-	_join_button_pressed_.emit($UI/LobbyScreen/ColorRect/OptionPanel/VBoxContainer/HostJoinHBox/JoinTextVBox/LobbyID.text.to_int())
+	NetworkMaster.join_lobby($UI/LobbyScreen/ColorRect/OptionPanel/VBoxContainer/HostJoinHBox/JoinTextVBox/LobbyID.text.to_int())
 
 func _on_player_joined() -> void:
 	$UI/LobbyScreen.hide()
@@ -90,6 +90,9 @@ func _on_player_joined() -> void:
 	#
 
 func _on_player_leave() -> void:
+	Global.isGamePaused = true
+	
 	game_over_screen.show_player_leave()
+	
 func _on_main_menu_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://interfaces/main_menu.tscn")

@@ -19,6 +19,7 @@ func show_win(player: int = 1) -> void:
 
 func show_player_leave() -> void:
 	rematch_button.hide()
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	animation_player.play("appear")
 	Global.isGamePaused = true
 	reason_label.text = "Not enough players!"

@@ -46,5 +46,9 @@ func _on_return_button_pressed() -> void:
 func _on_quit_button_pressed() -> void:
 	if NetworkMaster.singleplayer:
 		get_tree().set_pause(false)
+	else:
+		if multiplayer.multiplayer_peer != null: 
+			multiplayer.multiplayer_peer.close()
+			multiplayer.multiplayer_peer = null
 	get_tree().change_scene_to_file("res://interfaces/main_menu.tscn")
 	

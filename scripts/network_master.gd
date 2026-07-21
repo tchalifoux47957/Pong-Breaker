@@ -66,6 +66,7 @@ func join_lobby(newlobbyID: int) -> void:
 
 
 func _remove_player(id: int):
+	print("player left")
 	player_left.emit()
 	if !self.has_node(str(id)):
 		return
