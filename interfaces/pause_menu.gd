@@ -27,7 +27,7 @@ func pause() -> void:
 	if NetworkMaster.singleplayer:
 		get_tree().set_pause(true)
 	else:
-		NetworkMaster.isGamePaused = true
+		Global.isGamePaused = true
 
 func unpause() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -36,7 +36,7 @@ func unpause() -> void:
 	if NetworkMaster.singleplayer:
 		get_tree().set_pause(false)
 	else:
-		NetworkMaster.isGamePaused = false
+		Global.isGamePaused = false
 
 
 func _on_return_button_pressed() -> void:

@@ -6,6 +6,7 @@ const PADDLE = preload("uid://dqojax6xtqdwu")
 const BALL = preload("uid://dqgio6jn88ad2")
 
 @onready var game_master: GameMaster = $GameMaster
+@onready var game_over_screen: Control = $UI/GameOverScreen
 
 var players: Array[StaticBody2D]
 # Called when the node enters the scene tree for the first time.
@@ -77,3 +78,18 @@ func _on_join_button_pressed() -> void:
 func _on_player_joined() -> void:
 	$UI/LobbyScreen.hide()
 	$GameElements.show()
+
+#func return_to_lobby() -> void:
+	#$UI/LobbyScreen.show()
+	#$GameElements.hide()
+	#
+#func rematch() -> void:
+	#$UI/LobbyScreen.hide()
+	#$GameElements.show()
+	#$GameMaster.reset_match()
+	#
+
+func _on_player_leave() -> void:
+	game_over_screen.show_player_leave()
+func _on_main_menu_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://interfaces/main_menu.tscn")

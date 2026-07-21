@@ -15,14 +15,17 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	ball_pos = $"../Ball".position
-	dist = position.y - ball_pos.y
-	if abs(dist) > PADDLE_SPEED * delta:
-		move_by = PADDLE_SPEED * delta * (dist / abs(dist))
+	if Global.isGamePaused:
+		return
 	else:
-		move_by = dist
+		ball_pos = $"../Ball".position
+		dist = position.y - ball_pos.y
+		if abs(dist) > PADDLE_SPEED * delta:
+			move_by = PADDLE_SPEED * delta * (dist / abs(dist))
+		else:
+			move_by = dist
+			
+			
+		position.y -= move_by
 		
-		
-	position.y -= move_by
-	
-	position.y = clamp(position.y, p_height / 2, win_height - p_height / 2)
+		position.y = clamp(position.y, p_height / 2, win_height - p_height / 2)

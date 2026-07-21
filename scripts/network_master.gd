@@ -2,7 +2,7 @@ extends Node
 
 signal host_created()
 signal player_joined
-
+signal player_left
 const LOBBY_TYPE := Steam.LobbyType.LOBBY_TYPE_FRIENDS_ONLY
 const MAX_PLAYERS: int = 2
 
@@ -10,7 +10,6 @@ var singleplayer: bool = false
 var peer: SteamMultiplayerPeer
 var isJoining: bool = false
 var inGame: bool = false
-var isGamePaused:bool = false
 var lobbyID: int = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -21,7 +20,7 @@ func _ready() -> void:
 	Steam.lobby_created.connect(_on_lobby_created)
 	Steam.lobby_joined.connect(_on_lobby_joined)
 	Steam.join_requested.connect(_on_join_requested)
-
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	Steam.run_callbacks()
@@ -38,6 +37,7 @@ func _on_lobby_created(connect: int, newLobbyID: int) -> void:
 		peer.server_relay = true
 		peer.create_host()
 		multiplayer.multiplayer_peer = peer
+		multiplayer.peer_disconnected.connect(_remove_player)
 		host_created.emit()
 		print(lobbyID)
 	
@@ -64,5 +64,10 @@ func join_lobby(newlobbyID: int) -> void:
 	isJoining = true
 	Steam.joinLobby(newlobbyID)
 
-func setPaused() -> void:
-	isGamePaused = !isGamePaused
+
+func _remove_player(id: int):
+	player_left.emit()
+	if !self.has_node(str(id)):
+		return
+		
+	self.get_node(str(id)).queue_free()

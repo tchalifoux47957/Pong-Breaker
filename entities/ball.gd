@@ -22,19 +22,22 @@ func new_ball():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var collision = move_and_collide(dir * speed * delta)
-	var collider
-	if collision:
-		collider = collision.get_collider()
-		
-		if collider is Player :#|| collider is CPU_Player:
-			speed += ACCEL
-			dir = new_direction(collider)
-			print(speed)
-		else:
-			dir = dir.bounce(collision.get_normal())
-			if collider is Brick:
-				collider.queue_free()
+	if Global.isGamePaused:
+		return
+	else:
+		var collision = move_and_collide(dir * speed * delta)
+		var collider
+		if collision:
+			collider = collision.get_collider()
+			
+			if collider is Player :#|| collider is CPU_Player:
+				speed += ACCEL
+				dir = new_direction(collider)
+				print(speed)
+			else:
+				dir = dir.bounce(collision.get_normal())
+				if collider is Brick:
+					collider.queue_free()
 func random_direction():
 	var new_dir:= Vector2()
 	new_dir.x = [1, -1].pick_random()

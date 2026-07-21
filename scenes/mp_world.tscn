@@ -7,6 +7,7 @@
 [ext_resource type="Theme" uid="uid://b8qrjn3rdj1u8" path="res://PB_Theme.tres" id="4_u22x2"]
 [ext_resource type="Script" uid="uid://yui57riaw85m" path="res://interfaces/ErrorWindow.gd" id="5_owvdf"]
 [ext_resource type="PackedScene" uid="uid://dh56y3h2vlusn" path="res://interfaces/pause_menu.tscn" id="7_pios7"]
+[ext_resource type="PackedScene" uid="uid://csei43gvxwkwu" path="res://interfaces/game_over_screen.tscn" id="8_u22x2"]
 
 [sub_resource type="Animation" id="Animation_jf37d"]
 length = 0.001
@@ -213,7 +214,7 @@ theme = ExtResource("4_u22x2")
 placeholder_text = "Lobby ID"
 expand_to_text_length = true
 
-[node name="Button" type="Button" parent="UI/LobbyScreen/ColorRect/OptionPanel/VBoxContainer" unique_id=920717738]
+[node name="MainMenuButton" type="Button" parent="UI/LobbyScreen/ColorRect/OptionPanel/VBoxContainer" unique_id=920717738]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -309,6 +310,8 @@ text = "Accept"
 
 [node name="PauseMenu" parent="UI" unique_id=2133951487 instance=ExtResource("7_pios7")]
 
+[node name="GameOverScreen" parent="UI" unique_id=1237883102 instance=ExtResource("8_u22x2")]
+
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=452426108]
 _spawnable_scenes = PackedStringArray("uid://dqojax6xtqdwu")
 spawn_path = NodePath("..")
@@ -344,6 +347,7 @@ shape = SubResource("RectangleShape2D_qfnet")
 [connection signal="pressed" from="UI/LobbyScreen/ColorRect/OptionPanel/VBoxContainer/HostJoinHBox/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="UI/LobbyScreen/ColorRect/OptionPanel/VBoxContainer/HostJoinHBox/JoinTextVBox/JoinButton" to="." method="_on_join_button_pressed"]
 [connection signal="text_changed" from="UI/LobbyScreen/ColorRect/OptionPanel/VBoxContainer/HostJoinHBox/JoinTextVBox/LobbyID" to="." method="_on_line_edit_text_changed"]
+[connection signal="pressed" from="UI/LobbyScreen/ColorRect/OptionPanel/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="UI/ErrorPanel/VBoxContainer/Button" to="UI/ErrorPanel" method="_on_button_pressed"]
 [connection signal="spawned" from="MultiplayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]
 [connection signal="body_entered" from="GoalLeft" to="GameMaster" method="_on_goal_left_body_entered"]

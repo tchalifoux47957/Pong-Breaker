@@ -25,12 +25,9 @@ func _input(event: InputEvent) -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if !is_multiplayer_authority() && NetworkMaster.singleplayer == false:
+	if (!is_multiplayer_authority() && NetworkMaster.singleplayer == false) || Global.isGamePaused == true:
 		return
-		
-	if NetworkMaster.isGamePaused == true:
-		return
-	
+
 	if Input.is_action_pressed("up"):
 		position.y -= PADDLE_SPEED * delta
 	elif Input.is_action_pressed("down"):
