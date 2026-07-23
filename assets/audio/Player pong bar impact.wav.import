@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bky2qxflw1vb"
+path="res://.godot/imported/Player pong bar impact.wav-6bf477531f887426bd7a67f81753ece4.sample"
+
+[deps]
+
+source_file="res://assets/audio/Player pong bar impact.wav"
+dest_files=["res://.godot/imported/Player pong bar impact.wav-6bf477531f887426bd7a67f81753ece4.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

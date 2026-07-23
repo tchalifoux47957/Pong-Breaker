@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://berkww6b2runw"
+path="res://.godot/imported/Enemy scored.wav-bfafa02e8c3b8491049d776e48ffcca0.sample"
+
+[deps]
+
+source_file="res://assets/audio/Enemy scored.wav"
+dest_files=["res://.godot/imported/Enemy scored.wav-bfafa02e8c3b8491049d776e48ffcca0.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

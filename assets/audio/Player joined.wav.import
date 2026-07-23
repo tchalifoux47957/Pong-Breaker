@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c7dqbw34ly2cj"
+path="res://.godot/imported/Player joined.wav-b22cc40e3b2d408027ad4128ec574541.sample"
+
+[deps]
+
+source_file="res://assets/audio/Player joined.wav"
+dest_files=["res://.godot/imported/Player joined.wav-b22cc40e3b2d408027ad4128ec574541.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
