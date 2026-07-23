@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://wvneplrvl5na" path="res://interfaces/main_menu.gd" id="1_ekxnf"]
 [ext_resource type="Theme" uid="uid://b8qrjn3rdj1u8" path="res://PB_Theme.tres" id="1_l6cm7"]
+[ext_resource type="PackedScene" uid="uid://bsk7nvaibinj6" path="res://interfaces/options_menu.tscn" id="3_5v2am"]
+[ext_resource type="AudioStream" uid="uid://dm1gj4h6xlsdr" path="res://assets/audio/PongBreakerMenuMusic.wav" id="4_rjmdt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7vrkn"]
 content_margin_left = 4.0
@@ -51,7 +53,26 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.1148968, 0.11489681, 0.1148968, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1520102516]
+[node name="Label" type="Label" parent="." unique_id=487397504]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -438.0
+offset_top = -175.0
+offset_right = 64.0
+offset_bottom = -110.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_l6cm7")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 26
+theme_override_font_sizes/font_size = 64
+text = "Pong-Breaker"
+
+[node name="ButtonVBox" type="VBoxContainer" parent="." unique_id=1520102516]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -65,7 +86,7 @@ offset_bottom = 20.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="SP_Button" type="Button" parent="VBoxContainer" unique_id=2115331016]
+[node name="SP_Button" type="Button" parent="ButtonVBox" unique_id=2115331016]
 layout_mode = 2
 theme = ExtResource("1_l6cm7")
 theme_override_font_sizes/font_size = 36
@@ -73,7 +94,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_7vrkn")
 text = "Singleplayer"
 flat = true
 
-[node name="MP_Button" type="Button" parent="VBoxContainer" unique_id=467632308]
+[node name="MP_Button" type="Button" parent="ButtonVBox" unique_id=467632308]
 layout_mode = 2
 theme = ExtResource("1_l6cm7")
 theme_override_font_sizes/font_size = 36
@@ -81,7 +102,16 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_7vrkn")
 text = "Multiplayer"
 flat = true
 
-[node name="Options_Button" type="Button" parent="VBoxContainer" unique_id=460812803]
+[node name="Customization_Button" type="Button" parent="ButtonVBox" unique_id=1288461886]
+layout_mode = 2
+theme = ExtResource("1_l6cm7")
+theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_7vrkn")
+disabled = true
+text = "Customization"
+flat = true
+
+[node name="Options_Button" type="Button" parent="ButtonVBox" unique_id=460812803]
 layout_mode = 2
 theme = ExtResource("1_l6cm7")
 theme_override_font_sizes/font_size = 36
@@ -89,7 +119,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_7vrkn")
 text = "Options"
 flat = true
 
-[node name="Quit_Button" type="Button" parent="VBoxContainer" unique_id=685549107]
+[node name="Quit_Button" type="Button" parent="ButtonVBox" unique_id=685549107]
 layout_mode = 2
 theme = ExtResource("1_l6cm7")
 theme_override_font_sizes/font_size = 36
@@ -144,8 +174,21 @@ layout_mode = 2
 theme = ExtResource("1_l6cm7")
 text = "Return"
 
-[connection signal="pressed" from="VBoxContainer/SP_Button" to="." method="_on_sp_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/MP_Button" to="." method="_on_mp_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/Quit_Button" to="." method="_on_quit_button_pressed"]
+[node name="OptionsMenu" parent="." unique_id=996433419 instance=ExtResource("3_5v2am")]
+visible = false
+layout_mode = 1
+
+[node name="BGM_player" type="AudioStreamPlayer2D" parent="." unique_id=990942674]
+stream = ExtResource("4_rjmdt")
+autoplay = true
+bus = &"Music"
+
+[connection signal="pressed" from="ButtonVBox/SP_Button" to="." method="_on_sp_button_pressed"]
+[connection signal="pressed" from="ButtonVBox/MP_Button" to="." method="_on_mp_button_pressed"]
+[connection signal="pressed" from="ButtonVBox/Options_Button" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="ButtonVBox/Quit_Button" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="QuitPanel/VBoxContainer/HBoxContainer/QuitAcceptButton" to="." method="_on_quit_accept_button_pressed"]
 [connection signal="pressed" from="QuitPanel/VBoxContainer/HBoxContainer/QuitBackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="OptionsMenu/Panel/MenuVBox/ReturnButton" to="." method="_on_options_return_button_pressed"]
+
+[editable path="OptionsMenu"]

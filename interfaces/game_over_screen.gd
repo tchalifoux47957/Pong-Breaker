@@ -27,6 +27,7 @@ func show_player_leave() -> void:
 
 
 func _on_return_button_pressed() -> void:
+	Global.isGamePaused = false
 	get_tree().change_scene_to_file("res://interfaces/main_menu.tscn")
 
 

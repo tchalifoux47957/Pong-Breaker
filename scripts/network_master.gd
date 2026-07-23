@@ -72,3 +72,13 @@ func _remove_player(id: int):
 		return
 		
 	self.get_node(str(id)).queue_free()
+
+func leave_game() -> void:
+	if multiplayer.multiplayer_peer != null: 
+			multiplayer.multiplayer_peer.close()
+			multiplayer.multiplayer_peer = null
+			
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		leave_game()
+		get_tree().quit()

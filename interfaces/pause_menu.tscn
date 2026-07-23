@@ -2,6 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://b8qrjn3rdj1u8" path="res://PB_Theme.tres" id="1_1c715"]
 [ext_resource type="Script" uid="uid://dt3352u03e02j" path="res://interfaces/pause_menu.gd" id="1_7jorx"]
+[ext_resource type="PackedScene" uid="uid://bsk7nvaibinj6" path="res://interfaces/options_menu.tscn" id="3_vxxi2"]
 
 [node name="PauseMenu" type="Control" unique_id=2133951487]
 process_mode = 3
@@ -60,5 +61,13 @@ layout_mode = 2
 theme = ExtResource("1_1c715")
 text = "Quit"
 
+[node name="OptionsMenu" parent="." unique_id=996433419 instance=ExtResource("3_vxxi2")]
+visible = false
+layout_mode = 1
+
 [connection signal="pressed" from="Panel/PanelContainer/VBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="Panel/PanelContainer/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="Panel/PanelContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="OptionsMenu/Panel/MenuVBox/ReturnButton" to="." method="_on_options_return_button_pressed"]
+
+[editable path="OptionsMenu"]

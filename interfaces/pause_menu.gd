@@ -1,5 +1,6 @@
 extends Control
 
+@onready var options_menu: Control = $OptionsMenu
 
 var paused: bool = false
 var canPause: bool = false
@@ -47,8 +48,14 @@ func _on_quit_button_pressed() -> void:
 	if NetworkMaster.singleplayer:
 		get_tree().set_pause(false)
 	else:
-		if multiplayer.multiplayer_peer != null: 
-			multiplayer.multiplayer_peer.close()
-			multiplayer.multiplayer_peer = null
+		NetworkMaster.leave_game()
 	get_tree().change_scene_to_file("res://interfaces/main_menu.tscn")
 	
+
+
+func _on_options_button_pressed() -> void:
+	options_menu.show()
+
+
+func _on_options_return_button_pressed() -> void:
+	options_menu.hide()
